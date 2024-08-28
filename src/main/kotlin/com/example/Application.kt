@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.plugins.*
+import com.example.repository.AdviceRepositoryImpl
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -8,5 +9,8 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    configureRouting()
+    val adviceRepository = AdviceRepositoryImpl()
+
+    configureSerialization()
+    configureRouting(adviceRepository)
 }

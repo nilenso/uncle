@@ -9,9 +9,6 @@ import kotlin.test.assertEquals
 class ApplicationTest {
     @Test
     fun getAdviceReturnsOneAdvice() = testApplication {
-        application {
-            module()
-        }
 
         val response = client.get("/advice")
         val body =  response.bodyAsText()

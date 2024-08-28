@@ -1,13 +1,15 @@
 package com.example.plugins
 
+import com.example.dao.Advice
 import com.example.repository.AdviceRepository
+import com.example.repository.AdviceRepositoryImpl
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Application.configureRouting() {
+fun Application.configureRouting(adviceRepository: AdviceRepository) {
     routing {
         route("/health") {
             get {
@@ -17,21 +19,20 @@ fun Application.configureRouting() {
 
         route("/advice") {
             get {
-                val advice = AdviceRepository.getAdvice()
-                call.respondText(advice)
+                val advice = adviceRepository.getAdvice()
+                call.respond(advice)
             }
 
             post {
-                val formContent = call.receiveParameters()
-                val advice = formContent["advice"]
-
-                if (advice.isNullOrEmpty()) {
-                    call.respond(HttpStatusCode.BadRequest)
-                    return@post
-                }
-
                 try {
-                    AdviceRepository.addAdvice(advice)
+                    val advice = call.receive<Advice>()
+
+                    if (advice.advice.isEmpty()) {
+                        call.respond(HttpStatusCode.BadRequest)
+                        return@post
+                    }
+
+                    adviceRepository.addAdvice(advice)
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: Throwable) {
                     call.respond(HttpStatusCode.BadRequest)
