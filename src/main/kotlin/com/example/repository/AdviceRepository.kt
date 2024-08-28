@@ -1,7 +1,7 @@
 package com.example.repository
 
 object AdviceRepository {
-    private val sageAdvices = listOf(
+    private val sageAdvices = mutableListOf(
         "Time is more valuable than money. Once spent, you can never get it back, so use it wisely.",
         "Respect your elders and listen to their experiences. Their wisdom can guide you through life's challenges.",
         "Always be honest and transparent. Integrity is the foundation of trust and respect.",
@@ -16,6 +16,10 @@ object AdviceRepository {
 
     fun getAdvice(): String {
         return sageAdvices.random()
+    }
+
+    fun addAdvice(advice: String) {
+        sageAdvices.add(advice)
     }
 
 }
