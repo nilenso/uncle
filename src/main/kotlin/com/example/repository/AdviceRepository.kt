@@ -1,8 +1,9 @@
 package com.example.repository
 
-import com.example.dao.Advice
+import com.example.dao.AdviceDAO
+import com.example.domain.Advice
 
 interface AdviceRepository {
-    suspend fun getAdvice(): Advice
-    suspend fun addAdvice(advice: Advice)
+    suspend fun getAdvice(): AdviceDAO
+    suspend fun addAdvice(advice: AdviceDAO)
 }

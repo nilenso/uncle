@@ -1,8 +1,8 @@
 package com.example.plugins
 
-import com.example.dao.Advice
+import com.example.dao.AdviceDAO
+import com.example.domain.Advice
 import com.example.repository.AdviceRepository
-import com.example.repository.AdviceRepositoryImpl
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -25,7 +25,7 @@ fun Application.configureRouting(adviceRepository: AdviceRepository) {
 
             post {
                 try {
-                    val advice = call.receive<Advice>()
+                    val advice = call.receive<AdviceDAO>()
 
                     if (advice.advice.isEmpty()) {
                         call.respond(HttpStatusCode.BadRequest)

@@ -1,7 +1,7 @@
 package com.example
 
 import com.example.plugins.*
-import com.example.repository.AdviceRepositoryImpl
+import com.example.repository.PostgresAdviceRepository
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -9,8 +9,9 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    val adviceRepository = AdviceRepositoryImpl()
+    val adviceRepository = PostgresAdviceRepository()
 
     configureSerialization()
+    configureDatabase(environment.config)
     configureRouting(adviceRepository)
 }

@@ -1,8 +1,8 @@
 package com.example.repository
 
-import com.example.dao.Advice
+import com.example.dao.AdviceDAO
 
-class AdviceRepositoryImpl: AdviceRepository {
+class TransientAdviceRepository : AdviceRepository {
     private val sageAdvices = mutableListOf(
         "Time is more valuable than money. Once spent, you can never get it back, so use it wisely.",
         "Respect your elders and listen to their experiences. Their wisdom can guide you through life's challenges.",
@@ -16,11 +16,11 @@ class AdviceRepositoryImpl: AdviceRepository {
         "Never stop learning. Knowledge and skills are your greatest assets, and they grow with time and experience."
     )
 
-    override suspend fun getAdvice(): Advice {
-        return Advice(sageAdvices.random())
+    override suspend fun getAdvice(): AdviceDAO {
+        return AdviceDAO(sageAdvices.random())
     }
 
-    override suspend fun addAdvice(advice: Advice) {
+    override suspend fun addAdvice(advice: AdviceDAO) {
         sageAdvices.add(advice.advice)
     }
 
