@@ -47,4 +47,8 @@ dependencies {
     implementation("com.sksamuel.hoplite:hoplite-core:2.7.5")
     implementation("com.sksamuel.hoplite:hoplite-yaml:2.7.5")
     implementation("com.zaxxer:HikariCP:5.1.0")
+
+    implementation("org.flywaydb:flyway-core:10.17.2")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
+
 }

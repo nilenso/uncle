@@ -1,6 +1,5 @@
 package com.example.components
 
-import com.example.config.UncleConfig
 import com.example.handlers.AdviceHandler
 import com.example.modules.AdviceHandlerModule
 import com.example.modules.AdviceRepositoryModule
@@ -16,8 +15,7 @@ import dagger.Component
         DatabaseModule::class
     ]
 )
-interface UncleComponent {
+interface UncleHandlers {
     fun getAdviceHandler(): AdviceHandler
 
-    fun getConfig(): UncleConfig
 }

@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import dagger.Module
 import dagger.Provides
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import javax.sql.DataSource
 
@@ -31,5 +32,13 @@ interface DatabaseModule {
                 datasource = dataSource
             )
         }
+
+        @Provides
+        fun providesFlyway(dataSource: DataSource): Flyway {
+            return Flyway.configure()
+                .dataSource(dataSource)
+                .load()
+        }
+
     }
 }
