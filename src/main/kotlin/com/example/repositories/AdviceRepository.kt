@@ -1,7 +1,6 @@
-package com.example.repository
+package com.example.repositories
 
 import com.example.dao.AdviceDAO
-import com.example.domain.Advice
 
 interface AdviceRepository {
     suspend fun getAdvice(): AdviceDAO

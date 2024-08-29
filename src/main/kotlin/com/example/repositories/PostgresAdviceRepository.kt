@@ -1,10 +1,12 @@
-package com.example.repository
+package com.example.repositories
 
 import com.example.dao.AdviceDAO
 import com.example.domain.Advice
+import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
+import javax.inject.Inject
 
-class PostgresAdviceRepository: AdviceRepository {
+class PostgresAdviceRepository @Inject constructor(private val db: Database) : AdviceRepository {
     override suspend fun getAdvice(): AdviceDAO {
         var adviceDAO: AdviceDAO? = null
         transaction {

@@ -1,17 +1,25 @@
 package com.example
 
-import com.example.plugins.*
-import com.example.repository.PostgresAdviceRepository
+import com.example.components.DaggerUncleComponent
+import com.example.plugins.configureRouting
+import com.example.plugins.configureSerialization
 import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+
+    embeddedServer(
+        Netty,
+        port = 8080,
+        module = Application::module
+    ).start(wait = true)
 }
 
 fun Application.module() {
-    val adviceRepository = PostgresAdviceRepository()
+    val uncleComponent = DaggerUncleComponent.create()
+    val adviceHandler = uncleComponent.getAdviceHandler()
 
     configureSerialization()
-    configureDatabase(environment.config)
-    configureRouting(adviceRepository)
+    configureRouting(adviceHandler)
 }

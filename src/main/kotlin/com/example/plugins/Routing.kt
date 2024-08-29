@@ -1,15 +1,15 @@
 package com.example.plugins
 
 import com.example.dao.AdviceDAO
-import com.example.domain.Advice
-import com.example.repository.AdviceRepository
+import com.example.handlers.AdviceHandler
+import com.example.repositories.AdviceRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Application.configureRouting(adviceRepository: AdviceRepository) {
+fun Application.configureRouting(adviceHandler: AdviceHandler) {
     routing {
         route("/health") {
             get {
@@ -19,7 +19,7 @@ fun Application.configureRouting(adviceRepository: AdviceRepository) {
 
         route("/advice") {
             get {
-                val advice = adviceRepository.getAdvice()
+                val advice = adviceHandler.getAdvice()
                 call.respond(advice)
             }
 
@@ -32,7 +32,7 @@ fun Application.configureRouting(adviceRepository: AdviceRepository) {
                         return@post
                     }
 
-                    adviceRepository.addAdvice(advice)
+                    adviceHandler.addAdvice(advice)
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: Throwable) {
                     call.respond(HttpStatusCode.BadRequest)
