@@ -11,11 +11,11 @@ plugins {
     id("com.google.devtools.ksp") version "2.0.10-1.0.24"
 }
 
-group = "com.example"
+group = "com.nilenso.uncle"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.example.ApplicationKt")
+    mainClass.set("com.nilenso.uncle.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -31,7 +31,6 @@ dependencies {
 
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-config-yaml")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
@@ -53,8 +52,10 @@ dependencies {
 
     implementation("org.apache.logging.log4j:log4j-api:2.23.1")
     implementation("org.apache.logging.log4j:log4j-core:2.23.1")
+    implementation("org.apache.logging.log4j:log4j-layout-template-json:2.23.1")
     implementation("org.slf4j:slf4j-api:2.0.16")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.23.1")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.23.1")
 
-
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.5.4")
 }

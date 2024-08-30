@@ -1,1 +1,1 @@
-rootProject.name = "com.example.uncle-pro"
+rootProject.name = "com.nilenso.uncle"
