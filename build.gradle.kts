@@ -51,4 +51,10 @@ dependencies {
     implementation("org.flywaydb:flyway-core:10.17.2")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
 
+    implementation("org.apache.logging.log4j:log4j-api:2.23.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.23.1")
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.23.1")
+
+
 }

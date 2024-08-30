@@ -11,6 +11,7 @@ import javax.inject.Singleton
 interface AdviceHandlerModule {
 
     companion object {
+        @Singleton
         @Provides
         fun provideAdviceHandler(adviceRepository: AdviceRepository): AdviceHandler {
             return AdviceHandlerImpl(adviceRepository)

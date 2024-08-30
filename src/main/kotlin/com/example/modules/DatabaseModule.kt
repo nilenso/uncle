@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
+import javax.inject.Singleton
 import javax.sql.DataSource
 
 @Module
@@ -14,6 +15,7 @@ interface DatabaseModule {
 
     companion object {
         @Provides
+        @Singleton
         fun providesHikariDataSource(uncleConfig: UncleConfig): DataSource {
             val dbConfig = uncleConfig.db
             val config = HikariConfig().apply {
@@ -27,6 +29,7 @@ interface DatabaseModule {
         }
 
         @Provides
+        @Singleton
         fun providesDatabase(dataSource: DataSource): Database {
             return Database.connect(
                 datasource = dataSource
@@ -34,6 +37,7 @@ interface DatabaseModule {
         }
 
         @Provides
+        @Singleton
         fun providesFlyway(dataSource: DataSource): Flyway {
             return Flyway.configure()
                 .dataSource(dataSource)
