@@ -8,6 +8,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AdviceHandlerModule::class,
+        AdviceServiceModule::class,
         AdviceRepositoryModule::class,
         com.nilenso.uncle.webserver.modules.ConfigModule::class,
         com.nilenso.uncle.webserver.modules.DatabaseModule::class,

@@ -1,6 +1,7 @@
 package com.nilenso.uncle.webserver.plugins
 
 import com.nilenso.uncle.webserver.handlers.AdviceHandler
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
