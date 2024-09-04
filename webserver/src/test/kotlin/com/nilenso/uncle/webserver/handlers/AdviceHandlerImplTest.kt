@@ -1,6 +1,6 @@
 package com.nilenso.uncle.webserver.handlers
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 import com.nilenso.uncle.webserver.repositories.AdviceRepository
 import io.mockk.coEvery
 import io.mockk.coJustRun
@@ -26,7 +26,7 @@ class AdviceHandlerImplTest {
 
     @Test
     fun getAdviceShouldReturnAdviceUsingRepository() = runBlocking {
-        val expectedAdvice = AdviceDAO("Uncle's sage advice")
+        val expectedAdvice = AdviceDTO("Uncle's sage advice")
         coEvery { adviceRepository.getAdvice() } returns expectedAdvice
 
         val result = adviceHandler.getAdvice()
@@ -37,7 +37,7 @@ class AdviceHandlerImplTest {
 
     @Test
     fun addAdviceShouldAddAdviceUsingRepository() = runBlocking {
-        val adviceToAdd = AdviceDAO("New advice")
+        val adviceToAdd = AdviceDTO("New advice")
         coJustRun { adviceRepository.addAdvice(any()) }
 
         adviceHandler.addAdvice(adviceToAdd)

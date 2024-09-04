@@ -1,10 +1,8 @@
 package com.nilenso.uncle.webserver.plugins
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
 import com.nilenso.uncle.webserver.handlers.AdviceHandler
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 

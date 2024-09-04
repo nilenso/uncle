@@ -1,6 +1,6 @@
 package com.nilenso.uncle.webserver.plugins
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 import com.nilenso.uncle.webserver.handlers.AdviceHandler
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -36,7 +36,7 @@ class RoutingTest {
     @Test
     fun getAdviceShouldReturnAdvice() = testApplication {
         val mockAdviceHandler = mockk<AdviceHandler>()
-        val expectedAdvice = AdviceDAO("Sage advice")
+        val expectedAdvice = AdviceDTO("Sage advice")
         coEvery { mockAdviceHandler.getAdvice() } returns expectedAdvice
 
         application {
@@ -46,7 +46,7 @@ class RoutingTest {
 
         client.get("/advice").apply {
             assertThat(status, `is`(equalTo(HttpStatusCode.OK)))
-            assertThat(bodyAsText(), `is`(equalTo(Json.encodeToString(AdviceDAO.serializer(), expectedAdvice))))
+            assertThat(bodyAsText(), `is`(equalTo(Json.encodeToString(AdviceDTO.serializer(), expectedAdvice))))
         }
 
         coVerify { mockAdviceHandler.getAdvice() }
@@ -55,7 +55,7 @@ class RoutingTest {
     @Test
     fun postAdviceShouldCallAddAdvice() = testApplication {
         val mockAdviceHandler = mockk<AdviceHandler>()
-        val newAdvice = AdviceDAO("New advice")
+        val newAdvice = AdviceDTO("New advice")
         coJustRun { mockAdviceHandler.addAdvice(any()) }
 
         application {
@@ -65,7 +65,7 @@ class RoutingTest {
 
         client.post("/advice") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(AdviceDAO.serializer(), newAdvice))
+            setBody(Json.encodeToString(AdviceDTO.serializer(), newAdvice))
         }.apply {
             assertThat(status, `is`(equalTo(HttpStatusCode.NoContent)))
         }
@@ -76,7 +76,7 @@ class RoutingTest {
     @Test
     fun postAdviceShouldReturn400ForEmptyAdvice() = testApplication {
         val mockAdviceHandler = mockk<AdviceHandler>()
-        val emptyAdvice = AdviceDAO("")
+        val emptyAdvice = AdviceDTO("")
 
         application {
             configureSerialization()
@@ -85,7 +85,7 @@ class RoutingTest {
 
         client.post("/advice") {
             contentType(ContentType.Application.Json)
-            setBody(Json.encodeToString(AdviceDAO.serializer(), emptyAdvice))
+            setBody(Json.encodeToString(AdviceDTO.serializer(), emptyAdvice))
         }.apply {
             assertThat(status, `is`(equalTo(HttpStatusCode.BadRequest)))
         }

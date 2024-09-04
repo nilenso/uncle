@@ -1,8 +1,8 @@
 package com.nilenso.uncle.webserver.repositories
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 
 interface AdviceRepository {
-    suspend fun getAdvice(): AdviceDAO
-    suspend fun addAdvice(advice: AdviceDAO)
+    suspend fun getAdvice(): AdviceDTO
+    suspend fun addAdvice(advice: AdviceDTO)
 }

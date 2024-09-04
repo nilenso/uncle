@@ -1,6 +1,6 @@
 package com.nilenso.uncle.webserver.handlers
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 import com.nilenso.uncle.webserver.repositories.AdviceRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -16,7 +16,7 @@ class AdviceHandlerImpl @Inject constructor(private val adviceRepository: Advice
 
     override suspend fun addAdvice(call: ApplicationCall) {
         try {
-            val adviceReq = call.receive<AdviceDAO>()
+            val adviceReq = call.receive<AdviceDTO>()
 
             if (adviceReq.advice.isEmpty()) {
                 call.respond(HttpStatusCode.BadRequest)

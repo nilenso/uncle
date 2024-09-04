@@ -1,7 +1,7 @@
 package com.nilenso.uncle.webserver.repositories
 
 import com.nilenso.uncle.webserver.config.DBConfig
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 import kotlinx.coroutines.runBlocking
 import org.flywaydb.core.Flyway
 import org.hamcrest.MatcherAssert.assertThat
@@ -54,7 +54,7 @@ class PostgresAdviceRepositoryTest {
 
     @Test
     fun addAdviceShouldStoreAdviceInDB() = runBlocking {
-        val adviceToAdd = AdviceDAO("New sage advice")
+        val adviceToAdd = AdviceDTO("New sage advice")
 
         repository.addAdvice(adviceToAdd)
 

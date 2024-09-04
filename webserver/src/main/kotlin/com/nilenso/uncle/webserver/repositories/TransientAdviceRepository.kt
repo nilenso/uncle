@@ -1,6 +1,6 @@
 package com.nilenso.uncle.webserver.repositories
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import com.nilenso.uncle.webserver.dto.AdviceDTO
 
 class TransientAdviceRepository : com.nilenso.uncle.webserver.repositories.AdviceRepository {
     private val sageAdvices = mutableListOf(
@@ -16,11 +16,11 @@ class TransientAdviceRepository : com.nilenso.uncle.webserver.repositories.Advic
         "Never stop learning. Knowledge and skills are your greatest assets, and they grow with time and experience."
     )
 
-    override suspend fun getAdvice(): AdviceDAO {
-        return AdviceDAO(sageAdvices.random())
+    override suspend fun getAdvice(): AdviceDTO {
+        return AdviceDTO(sageAdvices.random())
     }
 
-    override suspend fun addAdvice(advice: AdviceDAO) {
+    override suspend fun addAdvice(advice: AdviceDTO) {
         sageAdvices.add(advice.advice)
     }
 
