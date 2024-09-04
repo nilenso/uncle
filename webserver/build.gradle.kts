@@ -63,6 +63,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.12")
     testImplementation("org.hamcrest:hamcrest:3.0")
     testImplementation(kotlin("test"))
+    testImplementation("org.testcontainers:testcontainers:1.20.1")
 }
 
 tasks.test {

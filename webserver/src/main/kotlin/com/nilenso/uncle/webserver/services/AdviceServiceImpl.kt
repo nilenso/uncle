@@ -6,7 +6,7 @@ import jakarta.inject.Inject
 
 class AdviceServiceImpl @Inject constructor(private val adviceRepository: AdviceRepository): AdviceService {
     override suspend fun getAdvice(): AdviceDTO {
-        return adviceRepository.getAdvice()
+        return AdviceDTO(adviceRepository.getAdvice()?.advice ?: "Uncle doesn't have any advice for you")
     }
 
     override suspend fun addAdvice(advice: AdviceDTO): Boolean {
