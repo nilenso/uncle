@@ -1,5 +1,6 @@
 package com.nilenso.uncle.webserver.repositories
 
+import com.nilenso.uncle.webserver.domain.Advice
 import com.nilenso.uncle.webserver.domain.AdviceTable
 import com.nilenso.uncle.webserver.dto.AdviceDTO
 import org.jetbrains.exposed.sql.Database
@@ -10,17 +11,20 @@ import javax.inject.Inject
 
 class PostgresAdviceRepository @Inject constructor(private val db: Database) :
     com.nilenso.uncle.webserver.repositories.AdviceRepository {
-    override suspend fun getAdvice(): AdviceDTO {
-        var adviceDTO: AdviceDTO? = null
+    override suspend fun getAdvice(): Advice? {
+        var advice: Advice? = null
         transaction {
-            adviceDTO = AdviceTable
+            advice = AdviceTable
                 .selectAll()
                 .orderBy(Random())
                 .limit(1)
-                .map { AdviceDTO(it[AdviceTable.adviceText]) }
+                .map { row -> Advice.new(row[AdviceTable.id].value) {
+                    this.advice = row[AdviceTable.adviceText]
+                }
+                }
                 .firstOrNull()
         }
-        return adviceDTO ?: AdviceDTO("Uncle doesn't have any advice for you")
+        return advice
     }
 
     override suspend fun addAdvice(advice: AdviceDTO) {

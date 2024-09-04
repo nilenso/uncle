@@ -1,6 +1,8 @@
 package com.nilenso.uncle.webserver.repositories
 
+import com.nilenso.uncle.webserver.domain.Advice
 import com.nilenso.uncle.webserver.dto.AdviceDTO
+import kotlin.random.Random
 
 class TransientAdviceRepository : com.nilenso.uncle.webserver.repositories.AdviceRepository {
     private val sageAdvices = mutableListOf(
@@ -16,8 +18,11 @@ class TransientAdviceRepository : com.nilenso.uncle.webserver.repositories.Advic
         "Never stop learning. Knowledge and skills are your greatest assets, and they grow with time and experience."
     )
 
-    override suspend fun getAdvice(): AdviceDTO {
-        return AdviceDTO(sageAdvices.random())
+    override suspend fun getAdvice(): Advice {
+        val adviceIdx = Random.nextInt(0, sageAdvices.size)
+        return Advice.new(adviceIdx) {
+            this.advice = sageAdvices[adviceIdx]
+        }
     }
 
     override suspend fun addAdvice(advice: AdviceDTO) {
