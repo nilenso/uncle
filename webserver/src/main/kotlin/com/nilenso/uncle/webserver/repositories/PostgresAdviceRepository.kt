@@ -1,7 +1,8 @@
 package com.nilenso.uncle.webserver.repositories
 
 import com.nilenso.uncle.webserver.domain.Advice
-import com.nilenso.uncle.webserver.domain.AdviceTable
+import com.nilenso.uncle.webserver.entities.AdviceRecord
+import com.nilenso.uncle.webserver.entities.AdviceTable
 import com.nilenso.uncle.webserver.dto.AdviceDTO
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Random
@@ -18,10 +19,7 @@ class PostgresAdviceRepository @Inject constructor(private val db: Database) :
                 .selectAll()
                 .orderBy(Random())
                 .limit(1)
-                .map { row -> Advice.new(row[AdviceTable.id].value) {
-                    this.advice = row[AdviceTable.adviceText]
-                }
-                }
+                .map { row -> Advice(row[AdviceTable.adviceText]) }
                 .firstOrNull()
         }
         return advice
@@ -29,7 +27,7 @@ class PostgresAdviceRepository @Inject constructor(private val db: Database) :
 
     override suspend fun addAdvice(advice: AdviceDTO) {
         transaction {
-            com.nilenso.uncle.webserver.domain.Advice.new {
+            AdviceRecord.new {
                 this.advice = advice.advice
             }
         }
