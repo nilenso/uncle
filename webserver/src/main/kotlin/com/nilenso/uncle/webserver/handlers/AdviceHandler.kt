@@ -1,8 +1,8 @@
 package com.nilenso.uncle.webserver.handlers
 
-import com.nilenso.uncle.webserver.dao.AdviceDAO
+import io.ktor.server.application.*
 
 interface AdviceHandler {
-   suspend fun getAdvice(): AdviceDAO
-   suspend fun addAdvice(advice: AdviceDAO)
+   suspend fun getAdvice(call: ApplicationCall)
+   suspend fun addAdvice(call: ApplicationCall)
 }

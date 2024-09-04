@@ -8,7 +8,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Application.configureRouting(adviceHandler: com.nilenso.uncle.webserver.handlers.AdviceHandler) {
+fun Application.configureRouting(adviceHandler: AdviceHandler) {
     routing {
         route("/health") {
             get {
@@ -17,26 +17,8 @@ fun Application.configureRouting(adviceHandler: com.nilenso.uncle.webserver.hand
         }
 
         route("/advice") {
-            get {
-                val advice = adviceHandler.getAdvice()
-                call.respond(advice)
-            }
-
-            post {
-                try {
-                    val advice = call.receive<AdviceDAO>()
-
-                    if (advice.advice.isEmpty()) {
-                        call.respond(HttpStatusCode.BadRequest)
-                        return@post
-                    }
-
-                    adviceHandler.addAdvice(advice)
-                    call.respond(HttpStatusCode.NoContent)
-                } catch (ex: Throwable) {
-                    call.respond(HttpStatusCode.BadRequest)
-                }
-            }
+            get { adviceHandler.getAdvice(call) }
+            post { adviceHandler.addAdvice(call) }
         }
     }
 }
