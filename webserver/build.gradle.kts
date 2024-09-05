@@ -60,10 +60,15 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+    testImplementation("org.junit.platform:junit-platform-suite-api:1.11.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-suite-engine:1.11.0")
     testImplementation("io.mockk:mockk:1.13.12")
     testImplementation("org.hamcrest:hamcrest:3.0")
     testImplementation(kotlin("test"))
     testImplementation("org.testcontainers:testcontainers:1.20.1")
+    testImplementation("org.testcontainers:postgresql:1.20.1")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.1")
+
 }
 
 tasks.test {
