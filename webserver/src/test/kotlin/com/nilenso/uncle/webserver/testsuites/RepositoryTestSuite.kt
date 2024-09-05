@@ -1,4 +1,4 @@
-package com.nilenso.uncle.webserver.repositories
+package com.nilenso.uncle.webserver.testsuites
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -42,7 +42,6 @@ class RepositoryTestSuite {
         @JvmStatic
         @AfterSuite
         fun tearDown() {
-            println("AFTER SUITE")
             flyway.clean()
             pgContainer.stop()
             testDuration = System.nanoTime() - testDuration
