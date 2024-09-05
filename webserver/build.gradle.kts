@@ -72,7 +72,9 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        include("com/nilenso/uncle/webserver/testsuites/**")
+    }
 }
 
 kotlin {

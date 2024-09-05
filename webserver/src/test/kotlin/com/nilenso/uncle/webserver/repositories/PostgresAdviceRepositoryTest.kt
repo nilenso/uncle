@@ -1,5 +1,6 @@
 package com.nilenso.uncle.webserver.repositories
 
+import com.nilenso.uncle.webserver.testsuites.RepositoryTestSuite
 import com.nilenso.uncle.webserver.dto.AdviceDTO
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.Database
