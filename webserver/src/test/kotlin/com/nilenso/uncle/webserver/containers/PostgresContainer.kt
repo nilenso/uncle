@@ -3,6 +3,7 @@ package com.nilenso.uncle.webserver.containers
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
+import org.junit.jupiter.api.extension.*
 import org.testcontainers.containers.PostgreSQLContainer
 import javax.sql.DataSource
 
