@@ -9,16 +9,17 @@ import org.junit.jupiter.api.extension.ExtendWith
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PostgresAdviceRepositoryTest {
+@ExtendWith(TestComponent.Extension::class)
+class PostgresAdviceRepositoryTest(tc: TestComponent) {
+
+    private val repository: PostgresAdviceRepository = tc.getPostgresAdviceRepository()
     @BeforeEach
     fun setupDb(): Unit {
         println("start test")
     }
 
     @Test
-    @ExtendWith(TestComponent.Extension::class)
-    fun addAdviceShouldAddAdvice(tc: TestComponent) {
-        val repository = tc.getPostgresAdviceRepository()
+    fun addAdviceShouldAddAdvice() {
         runBlocking {
             repository.addAdvice(AdviceDTO("This is just a test beta"))
             assertEquals("This is just a test beta", repository.getAdvice()?.advice, "Inserted advice not returned")
