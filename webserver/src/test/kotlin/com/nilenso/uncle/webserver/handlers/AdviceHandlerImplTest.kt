@@ -11,7 +11,6 @@ class AdviceHandlerImplTest {
 
     @BeforeEach
     fun setup() {
-        adviceService =
     }
 
     @Test

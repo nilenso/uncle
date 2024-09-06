@@ -1,10 +1,9 @@
 package com.nilenso.uncle.webserver.repositories
 
-import com.nilenso.uncle.webserver.testsuites.RepositoryTestSuite
 import com.nilenso.uncle.webserver.dto.AdviceDTO
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.exposed.sql.Database
-import org.junit.jupiter.api.BeforeAll
+import com.nilenso.uncle.webserver.components.DaggerTestComponent
+import com.nilenso.uncle.webserver.testsuites.RepositoryTestSuite
 import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,7 +13,7 @@ class PostgresAdviceRepositoryTest {
 
     @BeforeEach
     fun setupDb(): Unit {
-        repository = PostgresAdviceRepository(Database.connect(RepositoryTestSuite.dataSource()))
+        repository = RepositoryTestSuite.tc.getPostgresAdviceRepository()
         println("start test")
     }
     @Test
