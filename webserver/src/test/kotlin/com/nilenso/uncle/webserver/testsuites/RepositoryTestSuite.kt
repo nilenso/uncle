@@ -1,5 +1,6 @@
 package com.nilenso.uncle.webserver.testsuites
 
+import com.nilenso.uncle.webserver.containers.PostgresContainer
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.flywaydb.core.Flyway
@@ -16,36 +17,18 @@ import javax.sql.DataSource
 class RepositoryTestSuite {
     companion object {
         @Container
-        private val pgContainer = PostgreSQLContainer("postgres:16.0").withReuse(true)
-        private lateinit var flyway: Flyway
-        private lateinit var ds: DataSource
-        private var testDuration: Long = 0
+        private val pgContainer = PostgresContainer("postgres:16.0").withReuse(true)
 
         @JvmStatic
         @BeforeSuite
         fun setup() {
-            testDuration = System.nanoTime()
-            if (pgContainer.isRunning) {
-                return
-            }
-
             pgContainer.start()
-            flyway = Flyway.configure()
-                .dataSource(pgContainer.jdbcUrl, pgContainer.username, pgContainer.password)
-                .cleanDisabled(false)
-                .load()
-
-            flyway.clean()
-            flyway.migrate()
         }
 
         @JvmStatic
         @AfterSuite
         fun tearDown() {
-            flyway.clean()
             pgContainer.stop()
-            testDuration = System.nanoTime() - testDuration
-            println("Duration: ${Duration.ofNanos(testDuration).toMillis()}")
         }
 
         fun dataSource(): DataSource {
