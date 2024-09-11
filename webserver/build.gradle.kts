@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 val kotlin_version: String by project
 val logback_version: String by project
 val exposed_version: String by project
@@ -6,6 +8,7 @@ val daggerVersion: String by project
 plugins {
     application
     kotlin("jvm") version "2.0.10"
+    id("com.gradleup.shadow") version "8.3.1"
     id("io.ktor.plugin") version "2.3.12"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.10"
     id("com.google.devtools.ksp") version "2.0.10-1.0.24"
@@ -74,6 +77,12 @@ dependencies {
 tasks.test {
     useJUnitPlatform {
     }
+}
+
+tasks.named("shadowJar", ShadowJar::class) {
+    archiveBaseName.set("uncle-server")
+    archiveClassifier.set("")
+    archiveVersion.set("${version}")
 }
 
 kotlin {
