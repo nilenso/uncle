@@ -32,4 +32,14 @@ class AdviceHandlerImpl @Inject constructor(private val adviceService: AdviceSer
             call.respond(HttpStatusCode.BadRequest)
         }
     }
+
+    override suspend fun goNap(call: ApplicationCall) {
+        adviceService.goNap(call.request.queryParameters.get("id")?.toInt()!!)
+        call.respond(HttpStatusCode.NoContent)
+    }
+
+    override suspend fun goWakeup(call: ApplicationCall) {
+        adviceService.goWakeup(call.request.queryParameters.get("id")?.toInt()!!)
+        call.respond(HttpStatusCode.NoContent)
+    }
 }

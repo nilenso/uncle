@@ -19,5 +19,10 @@ fun Application.configureRouting(adviceHandler: AdviceHandler) {
             get { adviceHandler.getAdvice(call) }
             post { adviceHandler.addAdvice(call) }
         }
+
+        route("/uncle") {
+            post("/nap") { adviceHandler.goNap(call) }
+            post("/wakeup") { adviceHandler.goWakeup(call) }
+        }
     }
 }

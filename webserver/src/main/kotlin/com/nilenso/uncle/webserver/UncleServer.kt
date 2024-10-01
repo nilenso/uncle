@@ -7,6 +7,7 @@ import com.nilenso.uncle.webserver.plugins.configureSerialization
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import io.ktor.server.jetty.*
 import org.slf4j.Logger
 import javax.inject.Inject
 
@@ -14,7 +15,7 @@ class UncleServer @Inject constructor(val config: UncleConfig, private val log: 
     fun run() {
         log.info("Starting Server...")
         embeddedServer(
-            Netty,
+            Jetty,
             port = config.server.port,
             module = Application::module
         ).start(wait = true)

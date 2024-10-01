@@ -34,23 +34,11 @@ dependencies {
 
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("io.ktor:ktor-server-config-yaml")
+    implementation("io.ktor:ktor-server-jetty-jvm")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
-
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
-    implementation("org.postgresql:postgresql:42.7.4")
 
     implementation("com.google.dagger:dagger:$daggerVersion")
     ksp("com.google.dagger:dagger-compiler:$daggerVersion")
-
-    implementation("com.sksamuel.hoplite:hoplite-core:2.7.5")
-    implementation("com.sksamuel.hoplite:hoplite-yaml:2.7.5")
-    implementation("com.zaxxer:HikariCP:5.1.0")
-
-    implementation("org.flywaydb:flyway-core:10.17.2")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
 
     implementation("org.apache.logging.log4j:log4j-api:2.23.1")
     implementation("org.apache.logging.log4j:log4j-core:2.23.1")
@@ -58,8 +46,34 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.16")
     implementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.23.1")
 
+    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+    testImplementation("org.junit.platform:junit-platform-suite-api:1.11.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-suite-engine:1.11.0")
+    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.hamcrest:hamcrest:3.0")
+    testImplementation(kotlin("test"))
+    testImplementation("org.testcontainers:testcontainers:1.20.1")
+    testImplementation("org.testcontainers:postgresql:1.20.1")
+    testImplementation("org.testcontainers:junit-jupiter:1.20.1")
+
+    implementation("io.ktor:ktor-server-config-yaml")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.3")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4.1")
+
+    implementation("org.flywaydb:flyway-core:10.17.2")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
+
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.postgresql:postgresql:42.7.4")
+
+    implementation("com.sksamuel.hoplite:hoplite-core:2.7.5")
+    implementation("com.sksamuel.hoplite:hoplite-yaml:2.7.5")
+    implementation("com.zaxxer:HikariCP:5.1.0")
+
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.0")

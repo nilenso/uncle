@@ -27,4 +27,12 @@ class TransientAdviceRepository : com.nilenso.uncle.webserver.repositories.Advic
         sageAdvices.add(advice.advice)
     }
 
+    override suspend fun goNap(uncleId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun goWakeup(uncleId: Int) {
+        TODO("Not yet implemented")
+    }
+
 }

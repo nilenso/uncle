@@ -13,4 +13,12 @@ class AdviceServiceImpl @Inject constructor(private val adviceRepository: Advice
         adviceRepository.addAdvice(advice)
         return true
     }
+
+    override suspend fun goNap(uncleId: Int) {
+        adviceRepository.goNap(uncleId)
+    }
+
+    override suspend fun goWakeup(uncleId: Int) {
+        adviceRepository.goWakeup(uncleId)
+    }
 }
